@@ -1,0 +1,7 @@
+.idea
+.eslintcache
+coverage
+dist
+node_modules
+preview.mov
+static

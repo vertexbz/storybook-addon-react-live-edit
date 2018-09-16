@@ -1,0 +1,192 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:jest/recommended"
+  ],
+
+  "rules": {
+    "quotes": [
+      "warn",
+      "single"
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "semi": [
+      "warn",
+      "always"
+    ],
+    "curly": "off",
+    "no-use-before-define": [
+      "error",
+      "nofunc"
+    ],
+    "keyword-spacing": "warn",
+    "space-before-blocks": [
+      "warn",
+      "always"
+    ],
+    "eol-last": [
+      "warn",
+      "always"
+    ],
+    "semi-spacing": [
+      "warn",
+      {
+        "before": false,
+        "after": true
+      }
+    ],
+    "no-var": "error",
+    "object-shorthand": [
+      "error",
+      "always"
+    ],
+    "prefer-const": "error",
+    "max-depth": [
+      "error",
+      5
+    ],
+    "max-len": [
+      "warn",
+      145,
+      2
+    ],
+    "max-statements": [
+      "error",
+      20
+    ],
+    "complexity": [
+      "warn",
+      8
+    ],
+    "object-curly-spacing": [
+      "warn",
+      "always"
+    ],
+    "no-process-exit": "error",
+    "react/prop-types": "warn",
+    "react/no-did-mount-set-state": "error",
+    "react/no-did-update-set-state": "error",
+    "react/prefer-es6-class": [
+      "warn",
+      "always"
+    ],
+    "react/jsx-first-prop-new-line": [
+      "warn",
+      "multiline-multiprop"
+    ],
+    "react/jsx-closing-bracket-location": "warn",
+    "react/jsx-closing-tag-location": "warn",
+    "react/jsx-indent": [
+      "warn",
+      4
+    ],
+    "no-console": "warn",
+    "rest-spread-spacing": [
+      "warn",
+      "never"
+    ],
+    "indent": [
+      "warn",
+      4,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "comma-dangle": [
+      "warn",
+      "never"
+    ],
+    "no-underscore-dangle": 0,
+
+    "flowtype/boolean-style": [
+      "warn",
+      "boolean"
+    ],
+    "flowtype/define-flow-type": "warn",
+    "flowtype/delimiter-dangle": [
+      "warn",
+      "never"
+    ],
+    "flowtype/generic-spacing": [
+      "warn",
+      "never"
+    ],
+    "flowtype/no-primitive-constructor-types": "warn",
+    "flowtype/no-types-missing-file-annotation": "warn",
+    "flowtype/no-weak-types": ["warn", { "any": false }],
+    "flowtype/object-type-delimiter": [
+      "warn",
+      "comma"
+    ],
+    "flowtype/require-parameter-type": "warn",
+    "flowtype/require-return-type": [
+      "warn",
+      "always"
+    ],
+    "flowtype/require-valid-file-annotation": 2,
+    "flowtype/semi": [
+      "warn",
+      "always"
+    ],
+    "flowtype/space-after-type-colon": [
+      "warn",
+      "always"
+    ],
+    "flowtype/space-before-generic-bracket": [
+      "warn",
+      "never"
+    ],
+    "flowtype/space-before-type-colon": [
+      "warn",
+      "never"
+    ],
+    "flowtype/type-id-match": [
+      "warn",
+      "^([A-Z][a-z0-9]+)+$"
+    ],
+    "flowtype/union-intersection-spacing": [
+      "warn",
+      "always"
+    ],
+    "flowtype/use-flow-type": "warn",
+    "flowtype/valid-syntax": "warn",
+
+    "space-infix-ops": ["warn", {"int32Hint": false}],
+    "no-only-tests/no-only-tests" : "warn"
+  },
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true,
+    "mocha": true,
+    "jest/globals": true
+  },
+  "globals": {
+    "React": true
+  },
+  "plugins": [
+    "react",
+    "no-only-tests",
+    "flowtype",
+    "jest"
+  ],
+  "settings": {
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": true
+    }
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true,
+      "experimentalObjectRestSpread": true
+    }
+  }
+}

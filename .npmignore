@@ -1,0 +1,13 @@
+.idea
+.babelrc
+.eslintcache
+.eslintrc
+.flowconfig
+.gitignore
+coverage
+example
+node_modules
+preview.*
+src
+static
+yarn.lock
