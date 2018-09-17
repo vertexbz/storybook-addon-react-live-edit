@@ -58,6 +58,15 @@ storiesOf("Demo", module)
   .addLiveSource('demo', `render(<div>{scopeTest}</div>)`);
 ```
 
+> or
+
+You can use `withLiveEdit` story creator
+```javascript
+storiesOf("Demo", module)
+  .add('demo', withLiveEdit(`render(<div>{scopeTest}</div>)`));
+```
+
+
 ## API
 
 ### `addLiveSource`
@@ -65,6 +74,18 @@ storiesOf("Demo", module)
 addLiveSource(name, source[, scope]) 
 ```
 - `name` (string, required) - the story name
+- `source` (string, required) - story source to be rendered in preview and 
+  available for editing in "Live edit" panel
+- `scope` (object, optional) - variables provided to rendered story, 
+  these can be additional components, utilities or any other data.
+  Scope is merged with all variables previously provided 
+  by `withLiveEditScope` decorators.
+
+
+### `withLiveEdit`
+```
+withLiveEdit(source[, scope]) 
+```
 - `source` (string, required) - story source to be rendered in preview and 
   available for editing in "Live edit" panel
 - `scope` (object, optional) - variables provided to rendered story, 
