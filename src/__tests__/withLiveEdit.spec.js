@@ -1,7 +1,7 @@
 import { mount } from 'enzyme';
 import { symbol } from '../constants';
 import withLiveEdit from '../withLiveEdit';
-import LiveSource from '../component/LiveSource';
+import LivePreview from '../component/LivePreview';
 
 jest.mock('@storybook/addons');
 
@@ -20,10 +20,13 @@ describe('withLiveEdit', () => {
 
         const rendered = storyFn(context);
 
+        const renderStub = jest.spyOn(LivePreview.prototype, 'render').mockImplementation(() => null);
+
         const renderedStory = mount(rendered);
 
-        expect(renderedStory.type()).toBe(LiveSource);
+        expect(renderedStory.type()).toBe(LivePreview);
         expect(renderedStory.prop('code')).toBe(source);
         expect(renderedStory.prop('scope')).toEqual({ ...globalScope, ...localScope });
+        expect(renderStub).toBeCalled();
     });
 });

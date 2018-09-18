@@ -1,6 +1,6 @@
 import { mount } from 'enzyme';
 import addLiveSource from '../addLiveSource';
-import LiveSource from '../component/LiveSource';
+import LivePreview from '../component/LivePreview';
 import { symbol } from '../constants';
 
 jest.mock('@storybook/addons');
@@ -25,7 +25,7 @@ describe('addLiveSource', () => {
 
         const renderedStory = mount(storyFn({ [symbol.Scope]: contextScope }));
 
-        expect(renderedStory.type()).toBe(LiveSource);
+        expect(renderedStory.type()).toBe(LivePreview);
         expect(renderedStory.prop('code')).toBe(source);
         expect(renderedStory.prop('scope')).toEqual({ ...contextScope, ...localScope });
         expect(renderedStory.prop('channel')).toBe(addonsMock.__channel);

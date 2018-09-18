@@ -21,7 +21,9 @@ import 'storybook-addon-react-live-edit/dist/register';
 Add to .storybook/config.js 
 ```javascript
 import {setAddon} from '@storybook/react';
-import LiveEdit from 'storybook-addon-react-live-edit';
+import LiveEdit, {setOptions} from 'storybook-addon-react-live-edit';
+
+setOptions({ theme: 'darcula', presets: ['react'] });
 
 setAddon(LiveEdit);
 ```
@@ -47,7 +49,7 @@ import ExternalComponent from 'a-apackage';
 
 storiesOf("Demo", module)
   .addDecorator(withLiveEditScope({ ExternalComponent }))
-  .addLiveSource('demo', `render(<div>{scopeTest}</div>)`);
+  .addLiveSource('demo', `return <div>{scopeTest}</div>`);
 ```
 
 ## Usage
@@ -55,7 +57,7 @@ When LiveEdit addon is registered with storybooks `setAddon` function new method
 to add a story from source provided as a string. This source can be edited in "Live edit" panel
 ```javascript
 storiesOf("Demo", module)
-  .addLiveSource('demo', `render(<div>{scopeTest}</div>)`);
+  .addLiveSource('demo', `return <div>{scopeTest}</div>`);
 ```
 
 > or
@@ -63,7 +65,7 @@ storiesOf("Demo", module)
 You can use `withLiveEdit` story creator
 ```javascript
 storiesOf("Demo", module)
-  .add('demo', withLiveEdit(`render(<div>{scopeTest}</div>)`));
+  .add('demo', withLiveEdit(`return <div>{scopeTest}</div>`));
 ```
 
 

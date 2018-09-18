@@ -1,10 +1,8 @@
 // @flow
 import * as React from 'react';
-import { LiveProvider, LivePreview } from 'react-live';
-import LiveError from './LiveError';
+import ErrorDisplay from '@storybook/react/dist/client/preview/error_display';
 import { event } from '../constants';
-import PreviewStyle from './PreviewStyle';
-import returnToRender from '../returnToRender';
+import transform from '../transform';
 
 type LivePreviewProps = {
     scope?: {
@@ -19,7 +17,7 @@ type LivePreviewState = {
 };
 
 export default
-class LiveSource extends React.Component<LivePreviewProps, LivePreviewState> {
+class LivePreview extends React.Component<LivePreviewProps, LivePreviewState> {
     state = {
         code: this.props.code
     };
@@ -45,13 +43,11 @@ class LiveSource extends React.Component<LivePreviewProps, LivePreviewState> {
         this.props.channel.removeListener(event.UpdateSource, this.setSource);
     }
 
-    render(): ?React.Element<LiveProvider> {
-        return (
-            <LiveProvider code={this.state.code} transformCode={returnToRender} scope={this.props.scope} noInline>
-                <PreviewStyle />
-                <LivePreview />
-                <LiveError />
-            </LiveProvider>
-        );
+    render(): ?React.Element<*> {
+        try {
+            return transform(this.state.code, this.props.scope || {})();
+        } catch (e) {
+            return <ErrorDisplay error={e}/>;
+        }
     }
 }

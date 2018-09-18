@@ -1,12 +1,16 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { Editor } from 'react-live';
 import EventEmitter from 'events';
 import { event } from '../../constants';
-import LiveEditor from '../../component/LiveEditor';
-
+import Index from '../../component/LiveEditor';
+jest.useFakeTimers();
 describe('LiveEditor', () => {
-    it('should work properly', () => {
+    it('should work properly', () => { //eslint-disable-line max-statements
+        document.body.createTextRange = jest.fn().mockReturnValue({
+            getBoundingClientRect: jest.fn().mockReturnValue({ length: 0 }),
+            getClientRects: jest.fn().mockReturnValue({ length: 0 })
+        });
+
         const channelSpies = {
             emit: jest.spyOn(EventEmitter.prototype, 'emit'),
             on: jest.spyOn(EventEmitter.prototype, 'on'),
@@ -15,12 +19,14 @@ describe('LiveEditor', () => {
 
         const channel = new EventEmitter();
 
-        const wrapper = mount(<LiveEditor api={null} channel={channel} />);
+        const wrapper = mount(<Index api={null} channel={channel} />);
 
+        expect(wrapper.instance().codeMirror).toBeFalsy();
         expect(wrapper.text()).toBe('Editor unavailable');
 
-        expect(channelSpies.on).toBeCalledTimes(1);
+        expect(channelSpies.on).toBeCalledTimes(2);
         expect(channelSpies.on).toBeCalledWith(event.LoadSource, expect.any(Function));
+        expect(channelSpies.on).toBeCalledWith(event.SyncOptions, expect.any(Function));
 
 
         const code = 'source code';
@@ -30,18 +36,21 @@ describe('LiveEditor', () => {
         wrapper.update();
 
 
-        expect(wrapper.find(Editor).exists()).toBeTruthy();
-        expect(wrapper.find(Editor).prop('code')).toBe(code);
+        expect(wrapper.find('div div').exists()).toBeTruthy();
+        expect(wrapper.instance().codeMirror).toBeTruthy();
 
 
-        wrapper.find(Editor).prop('onChange')('other source');
+        const codeMirrorOnChangeHandler = wrapper.instance().codeMirror._handlers.change[0];
+
+        codeMirrorOnChangeHandler({ getValue: jest.fn().mockReturnValue('other source') }, { origin: 'not setValue' });
 
         expect(channelSpies.emit).toBeCalledTimes(1);
         expect(channelSpies.emit).toBeCalledWith(event.UpdateSource, 'other source');
 
 
         wrapper.unmount();
-        expect(channelSpies.removeListener).toBeCalledTimes(1);
+        expect(channelSpies.removeListener).toBeCalledTimes(2);
         expect(channelSpies.removeListener).toBeCalledWith(event.LoadSource, expect.any(Function));
+        expect(channelSpies.removeListener).toBeCalledWith(event.SyncOptions, expect.any(Function));
     });
 });
