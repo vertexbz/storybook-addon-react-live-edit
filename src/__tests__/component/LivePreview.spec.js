@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { shallow, mount } from 'enzyme';
-import ErrorDisplay from '@storybook/react/dist/client/preview/error_display';
 import { event } from '../../constants';
 import LivePreview from '../../component/LivePreview';
+import ErrorDisplay from '../../component/ErrorDisplay';
 
 import addonsMock from '@storybook/addons';
 import { setOptions } from '../../options';

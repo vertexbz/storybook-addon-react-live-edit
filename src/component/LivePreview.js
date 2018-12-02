@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import ErrorDisplay from '@storybook/react/dist/client/preview/error_display';
+import ErrorDisplay from './ErrorDisplay';
 import { event } from '../constants';
 import transform from '../transform';
 
