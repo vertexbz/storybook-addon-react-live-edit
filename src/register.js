@@ -8,7 +8,9 @@ addons.register('storybook/react-live-edit', (api: *): * => {
     addons.addPanel('storybook/react-live-edit/panel', {
         title: 'Live Edit',
         render({ active }): React.Element<typeof LiveEditor> {
-            return <LiveEditor channel={addons.getChannel()} api={api} theme={getOptions().theme}  active={active} />;
+            return active ? (
+                <LiveEditor channel={addons.getChannel()} api={api} theme={getOptions().theme} />
+            ) : null;
         }
     });
 });
