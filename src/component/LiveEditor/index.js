@@ -12,7 +12,8 @@ import { themeNameToVarName } from './utils';
 type LiveEditorProps = {
     channel: any,
     api: any,
-    theme?: ?string
+    theme?: ?string,
+    active: boolean
 };
 
 type LiveEditorState = {
@@ -68,7 +69,7 @@ class LiveEditor extends React.Component<LiveEditorProps, LiveEditorState> {
     }
 
     componentDidUpdate() {
-        if (this.state.code !== null) {
+        if (this.state.code !== null && this.props.active) {
             const theme = themeNameToVarName(this.state.theme) in themes ? this.state.theme : 'default';
             if (!this.codeMirror) {
                 this.codeMirror = CodeMirror(this.codeMirrorRef, { mode: 'jsx', theme });
@@ -93,7 +94,11 @@ class LiveEditor extends React.Component<LiveEditorProps, LiveEditorState> {
         this.codeMirrorRef = el;
     }
 
-    render(): React.Element<'div'> {
+    render(): ?React.Element<'div'> {
+        if (!this.props.active) {
+            return null;
+        }
+
         if (this.state.code === null) {
             return (
                 <div
@@ -113,7 +118,7 @@ class LiveEditor extends React.Component<LiveEditorProps, LiveEditorState> {
 
         const themeVarName = themeNameToVarName(this.state.theme);
         return (
-            <div style={{ width: '100%', display: 'flex', flex: '1 1' }}>
+            <div style={{ width: '100%', display: 'flex', flex: '1 1', minHeight: '100%' }}>
                 {themeVarName in themes && (<style dangerouslySetInnerHTML={{ __html: themes[themeVarName] }} />) }
                 <style dangerouslySetInnerHTML={{ __html: CodeMirrorStyle }} />
                 <style

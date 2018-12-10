@@ -2,8 +2,10 @@ import * as React from 'react';
 import { mount } from 'enzyme';
 import EventEmitter from 'events';
 import { event } from '../../constants';
-import Index from '../../component/LiveEditor';
+import LiveEditor from '../../component/LiveEditor';
+
 jest.useFakeTimers();
+
 describe('LiveEditor', () => {
     it('should work properly', () => { //eslint-disable-line max-statements
         document.body.createTextRange = jest.fn().mockReturnValue({
@@ -19,7 +21,7 @@ describe('LiveEditor', () => {
 
         const channel = new EventEmitter();
 
-        const wrapper = mount(<Index api={null} channel={channel} />);
+        const wrapper = mount(<LiveEditor api={null} channel={channel} active />);
 
         expect(wrapper.instance().codeMirror).toBeFalsy();
         expect(wrapper.text()).toBe('Editor unavailable');

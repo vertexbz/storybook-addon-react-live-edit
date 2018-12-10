@@ -29,5 +29,22 @@ describe('register', () => {
 
         expect(addonsMock.getChannel).toBeCalled();
         expect(renderedPanel.type()).toBe(LiveEditor);
+        expect(renderedPanel.prop('active')).toBeTruthy();
+    });
+
+    it('registers live edit plugin and does not render panel', () => {
+        require('../register');
+
+        const registerCallback = addonsMock.register.mock.calls[0][1];
+
+        registerCallback();
+
+        const addPanelPayload = addonsMock.addPanel.mock.calls[0][1];
+
+        const renderedPanel = mount(addPanelPayload.render({ active: false }));
+
+        expect(addonsMock.getChannel).toBeCalled();
+        expect(renderedPanel.type()).toBe(LiveEditor);
+        expect(renderedPanel.prop('active')).toBeFalsy();
     });
 });
