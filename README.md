@@ -102,7 +102,7 @@ withLiveEditScope(scope)
 - `scope` (object, required) - variables provided to rendered story, 
   these can be additional components, utilities or any other data.
   Scope is merged with all variables previously provided 
-  by `withLiveEditScope` decorators.
+  by `withLiveEditScope` decorators. React should be imported and provided within the scope object.
 
 
 ## Example
