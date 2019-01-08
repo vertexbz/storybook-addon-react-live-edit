@@ -48,7 +48,7 @@ import {withLiveEditScope} from 'storybook-addon-react-live-edit';
 import ExternalComponent from 'a-apackage';
 
 storiesOf("Demo", module)
-  .addDecorator(withLiveEditScope({ ExternalComponent }))
+  .addDecorator(withLiveEditScope({ React, ExternalComponent }))
   .addLiveSource('demo', `return <div>{scopeTest}</div>`);
 ```
 
@@ -65,7 +65,7 @@ storiesOf("Demo", module)
 You can use `withLiveEdit` story creator
 ```javascript
 storiesOf("Demo", module)
-  .add('demo', withLiveEdit( React, `return <div>{scopeTest}</div>`));
+  .add('demo', withLiveEdit(`return <div>{scopeTest}</div>`));
 ```
 
 
