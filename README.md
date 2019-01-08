@@ -65,7 +65,7 @@ storiesOf("Demo", module)
 You can use `withLiveEdit` story creator
 ```javascript
 storiesOf("Demo", module)
-  .add('demo', withLiveEdit(`return <div>{scopeTest}</div>`));
+  .add('demo', withLiveEdit( React, `return <div>{scopeTest}</div>`));
 ```
 
 
