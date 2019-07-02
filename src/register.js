@@ -5,14 +5,15 @@ import LiveEditor from './component/LiveEditor';
 import { getOptions } from './options';
 
 type RenderProps = {
-    active: boolean
+    active: boolean,
+    key?: string | number
 };
 
 addons.register('storybook/react-live-edit', (api: *): * => {
     addons.addPanel('storybook/react-live-edit/panel', {
         title: 'Live Edit',
-        render({ active }: RenderProps = { active: true }): ?React.Element<typeof LiveEditor> {
-            return <LiveEditor channel={addons.getChannel()} api={api} theme={getOptions().theme} active={active} />;
+        render({ active, key }: RenderProps = { active: true }): ?React.Element<typeof LiveEditor> {
+            return <LiveEditor key={key} channel={addons.getChannel()} api={api} theme={getOptions().theme} active={active} />;
         }
     });
 });

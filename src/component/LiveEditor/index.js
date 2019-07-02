@@ -45,6 +45,10 @@ class LiveEditor extends React.Component<LiveEditorProps, LiveEditorState> {
         this.codemirrorValueChanged = this.codemirrorValueChanged.bind(this);
     }
 
+    shouldComponentUpdate(_: any, state: LiveEditorState): boolean {
+        return this.state.theme !== state.theme || Boolean(this.state.code) !== Boolean(state.code);
+    }
+
     loadSource(code: string) {
         this.setState({ code });
     }
@@ -116,7 +120,7 @@ class LiveEditor extends React.Component<LiveEditorProps, LiveEditorState> {
 
         const themeVarName = themeNameToVarName(this.state.theme);
         return (
-            <div style={{ width: '100%', display: 'flex', flex: '1 1', minHeight: '100%' }}>
+            <div key={themeVarName} style={{ width: '100%', display: 'flex', flex: '1 1', minHeight: '100%' }}>
                 {themeVarName in themes && (<style dangerouslySetInnerHTML={{ __html: themes[themeVarName] }} />) }
                 <style dangerouslySetInnerHTML={{ __html: CodeMirrorStyle }} />
                 <style
