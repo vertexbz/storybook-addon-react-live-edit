@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import CodeMirror from 'codemirror';
-import { baseFonts } from '@storybook/components/dist/theme';
 import { event } from '../../constants';
 import CodeMirrorStyle, * as themes from './styles';
 
@@ -103,7 +102,6 @@ class LiveEditor extends React.Component<LiveEditorProps, LiveEditorState> {
             return (
                 <div
                     style={{
-                        ...baseFonts,
                         width: '100%',
                         textAlign: 'center',
                         padding: '20px',
