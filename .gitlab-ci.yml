@@ -1,0 +1,31 @@
+stages:
+- lint
+- flow
+- test
+
+image: node:11.6
+
+cache:
+  untracked: true
+  key: "$CI_PROJECT_ID"
+  paths:
+    - node_modules/
+    - .yarn
+
+before_script:
+  - yarn install --pure-lockfile --cache-folder .yarn
+
+ESLint:
+  stage: lint
+  script:
+    - yarn lint
+    
+FlowJS:
+  stage: flow
+  script:
+    - yarn flow
+    
+Jest:
+  stage: test
+  script:
+    - yarn test
