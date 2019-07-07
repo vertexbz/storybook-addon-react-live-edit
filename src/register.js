@@ -12,7 +12,7 @@ type RenderProps = {
 addons.register('storybook/react-live-edit', (api: *): * => {
     addons.addPanel('storybook/react-live-edit/panel', {
         title: 'Live Edit',
-        render({ active, key }: RenderProps = { active: true }): ?React.Element<typeof LiveEditor> {
+        render({ active, key }: RenderProps = ({ active: true }: any)): ?React.Element<typeof LiveEditor> {
             return <LiveEditor key={key} channel={addons.getChannel()} api={api} theme={getOptions().theme} active={active} />;
         }
     });
