@@ -45,8 +45,8 @@ class LiveEditor extends React.Component<LiveEditorProps, LiveEditorState> {
         this.codemirrorValueChanged = this.codemirrorValueChanged.bind(this);
     }
 
-    shouldComponentUpdate(_: any, state: LiveEditorState): boolean {
-        return this.state.theme !== state.theme || Boolean(this.state.code) !== Boolean(state.code);
+    shouldComponentUpdate(nextProps: LiveEditorProps, state: LiveEditorState): boolean {
+        return this.props.active !== nextProps.active || this.state.theme !== state.theme || Boolean(this.state.code) !== Boolean(state.code);
     }
 
     loadSource(code: string) {
